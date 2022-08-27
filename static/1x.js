@@ -1,13 +1,13 @@
-let preview;
+let preview = document.getElementById("preview");
 let file = new File([1], "a");
 let reader = new FileReader();
 function previewFile() {
-  preview = document.getElementById("preview");
   file = document.getElementById("upload").files[0];
   reader = new FileReader();
   reader.addEventListener(
     "load",
     () => {
+      preview.removeAttribute("hidden");
       preview.src = reader.result;
     },
     false
