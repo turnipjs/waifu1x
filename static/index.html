@@ -1,64 +1,143 @@
 <!DOCTYPE html>
 
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>waifu1x</title>
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6276712621254375"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="normalize.min.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="style.css">
   </head>
-  <body>
-    <input
-      type="file"
-      id="upload"
-      name="upload"
-      onchange="previewFile()"
-      id="upload"
-    />
-    <img src="" height="200" alt="Image preview" id="preview" />
-    <button onclick="download(file.name, reader.result)">
-      Scale and Download
-    </button>
-    <script type="text/javascript">
-      let preview;
-      let file = new File([1], "a");
-      let reader = new FileReader();
-      function previewFile() {
-        preview = document.getElementById("preview");
-        file = document.getElementById("upload").files[0];
-        reader = new FileReader();
-        reader.addEventListener(
-          "load",
-          () => {
-            preview.src = reader.result;
-          },
-          false
-        );
+  <body aria-hidden="false" style="padding: 0px;">
+    <div class="all-page" style="height: auto !important;">
+      <h1 class="main-title">waifu1x</h1>
 
-        if (file) {
-          reader.readAsDataURL(file);
-        }
-      }
+      <div style="width: 90%; height: auto !important;">
+	<!-- waifu2x-top-fix2 -->
+      </div>
+      <p>Single-Image Regular-Resolution for Any-Style Image using 0 Deep Convolutional Neural Networks. And it supports photo.</p>
+      <p class="margin1 link-box">
+	<a href="https://github.com/turnipjs/waifu1x" class="blue-link" target="_blank">
+	  Go to GitHub
+	</a>
+      </p>
+      <form action="/api" method="POST" enctype="multipart/form-data" target="_blank">
+	<input type="hidden" name="recap" id="recap_response">
+	<div class="option-box first">
+	  <div class="option-left">Image choosing:</div>
+	  <div class="option-right">
+	    <div class="option-right-small">
+	      Choose a file:
+        <input
+          type="file"
+          id="upload"
+          name="upload"
+          onchange="previewFile()"
+          id="upload"
+        />
+	  </div>
+	  <div class="option-hint file_limits">
+	    Limits: Size: none, Noise Reduction: none, Upscaling: none.
+	  </div>
+    <img src="" height="250" width="250" alt="Image preview" id="preview" />
+	</div>
+	<div class="option-box">
+	  <div class="option-left">
+	    Style:
+	  </div>
+	  <div class="option-right">
+	    <label><input type="radio" name="style" class="radio" value="art" checked="">
+	      <span class="r-text">
+		Artwork
+	      </span>
+	    </label>
+	    <label><input type="radio" name="style" class="radio" value="photo">
+	      <span class="r-text">
+		Photo
+	      </span>
+	    </label>
+	  </div>
+	</div>
+	<div class="option-box">
+	  <div class="option-left">
+	    Noise Reduction:
+	    <div class="option-left-small">
+	      (expect JPEG artifact)
+	    </div>
+	  </div>
+	  <div class="option-right">
+	    <label><input type="radio" name="noise" class="radio" value="-1">
+	      <span class="r-text">
+		None
+	      </span>
+	    </label>
+	    <label><input type="radio" name="noise" class="radio" value="0" checked="">
+	      <span class="r-text">
+		Low (None)
+	      </span>
+	    </label>
+	    <label><input type="radio" name="noise" class="radio" value="1" checked="">
+	      <span class="r-text">
+		Medium (None)
+	      </span>
+	    </label>
+      <br>
+	    <label>
+	      <input type="radio" name="noise" class="radio" value="2">
+	      <span class="r-text">
+		High (None)
+	      </span>
+	    </label>
+	    <label>
+	      <input type="radio" name="noise" class="radio" value="3">
+	      <span class="r-text">
+		Highest (None)
+	      </span>
+	    </label>
+	  </div>
+	  <div class="option-hint">
+	    You need use noise reduction if image actually has noise. This service does not provide noise reduction.
+	  </div>
+	</div>
+	<div class="option-box">
+	  <div class="option-left">
+	    Upscaling:
+	    <div class="option-left-small"></div>
+	  </div>
+	  <div class="option-right">
+	    <label><input type="radio" name="scale" class="radio" value="-1" checked="">
+	      <span class="r-text">
+		None
+	      </span>
+	    </label>
+	    <label><input type="radio" name="scale" class="radio" value="1">
+	      <span class="r-text">
+		1x
+	      </span>
+	    </label>
+	    <label><input type="radio" name="scale" class="radio" value="2">
+	      <span class="r-text">
+		0%
+	      </span>
+	    </label>
+	  </div>
+	</div>
+	  <input class="button" id="submit-button" onclick="download(file.name, reader.result)" value="Scale and Download" type="submit">
+	<div class="bottom-hint">
+	  <div style="color:#3F51B5;margin-top:1em;">
+	    <a href="https://www.patreon.com/nagadomi" style="text-decoration: underline;font-size:1.4em">Support the original on Patreon</a>, or <a style="text-decoration: underline;font-size:1.4em" href="https://fantia.jp/waifu2x">Fantia.jp</a>
+	  </div>
+	  <ul>
 
-      function download() {
-        let fname = file.name.split(".");
-        fname.splice(1, 0, "_@1x.");
-        fname = fname.join("");
+	      <li>If you are using Firefox, you are a hero to the American People.</li>
 
-        let link = document.createElement("a");
-        link.download = fname;
-
-        link.href = reader.result;
-
-        link.style.display = "none";
-        document.body.appendChild(link);
-
-        link.click();
-        document.body.removeChild(link);
-      }
-    </script>
+	  </ul>
+	</div>
+      </form>
+    </div>
+    <div class="bottom-info address">
+      <a href="https://github.com/turnipjs/waifu1x" class="gray-link" target="_blank">waifu1x</a>
+    </div>
+    <script src="1x.js" charset="utf-8"></script>
   </body>
 </html>
