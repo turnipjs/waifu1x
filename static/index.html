@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>waifu1x</title>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6276712621254375"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <input
+      type="file"
+      id="upload"
+      name="upload"
+      onchange="previewFile()"
+      id="upload"
+    />
+    <img src="" height="200" alt="Image preview" id="preview" />
+    <button onclick="download(file.name, reader.result)">
+      Scale and Download
+    </button>
+    <script type="text/javascript">
+      let preview;
+      let file = new File([1], "a");
+      let reader = new FileReader();
+      function previewFile() {
+        preview = document.getElementById("preview");
+        file = document.getElementById("upload").files[0];
+        reader = new FileReader();
+        reader.addEventListener(
+          "load",
+          () => {
+            preview.src = reader.result;
+          },
+          false
+        );
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      }
+
+      function download() {
+        let fname = file.name.split(".");
+        fname.splice(1, 0, "_@1x.");
+        fname = fname.join("");
+
+        let link = document.createElement("a");
+        link.download = fname;
+
+        link.href = reader.result;
+
+        link.style.display = "none";
+        document.body.appendChild(link);
+
+        link.click();
+        document.body.removeChild(link);
+      }
+    </script>
+  </body>
+</html>
